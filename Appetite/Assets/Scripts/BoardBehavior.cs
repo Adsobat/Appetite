@@ -8,6 +8,8 @@ public class BoardBehavior : MonoBehaviour {
 
 	public BoxCollider handCollider;
 	public BoxCollider fieldCollider;
+	//TODO Remove just for Debugg
+	public GameObject DummyCard;
 
 
 	private List<CardBehaviourBase> 	handCards;
@@ -27,6 +29,9 @@ public class BoardBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		 if (Input.GetKeyDown("space")){
+			 drawCard();
+		 }
 		
 	}
 	
@@ -54,6 +59,10 @@ public class BoardBehavior : MonoBehaviour {
 		
 		
 	}
+	public void drawCard(){
+		
+		addToHand(((GameObject) Instantiate(DummyCard, transform.position, transform.rotation)).GetComponent(typeof(CardBehaviourBase)) as CardBehaviourBase);
+	}
 	public void startHolding(CardBehaviourBase card){
 		
 		holdingCard = card;	
@@ -68,5 +77,12 @@ public class BoardBehavior : MonoBehaviour {
 	public void addToField(CardBehaviourBase card){
 		onBoardCars.Add(card);
 		card.gameObject.transform.position = fieldCollider.center;
+		//TODO JUST FOR DEBUGG!!
+		removeCard(card);
+	}
+	private void removeCard(CardBehaviourBase card){
+		handCards.Remove(card);
+		onBoardCars.Remove(card);
+		Destroy(card.gameObject);// DIRTY TODO
 	}
 }
