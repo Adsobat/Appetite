@@ -13,7 +13,7 @@ public abstract class CardBehaviourBase : MonoBehaviour {
 
 	private bool isDrageing = false;
 	private Vector3 touchPosWorld;
-	private RaycastHit hit;
+	private RaycastHit[] hits;
 
 	void Update () {
 		UpdateUI();
@@ -33,9 +33,13 @@ public abstract class CardBehaviourBase : MonoBehaviour {
 			
 			touchPosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			print(touchPosWorld);
-			if(Physics.Raycast(touchPosWorld, Camera.main.transform.forward) ){
-				print("Hello");
-				isDrageing = true;				
+			hits= Physics.RaycastAll(touchPosWorld, Camera.main.transform.forward);
+			for(int i = 0; i < hits.Length; i++){
+
+				if(hits[i].transform == transform) {
+					print("Hello");
+					isDrageing = true;				
+				}
 			}
 			
 		}
