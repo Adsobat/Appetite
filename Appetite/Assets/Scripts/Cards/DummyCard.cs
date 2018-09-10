@@ -6,8 +6,10 @@ public class DummyCard : CardBehaviourBase {
 
 	// Use this for initialization
 	void Start () {
-		
+		base.Start();
 	}
 	
-
+	public override void OnPlayed(){
+		print("I am played DUMMY");
+	}
 }

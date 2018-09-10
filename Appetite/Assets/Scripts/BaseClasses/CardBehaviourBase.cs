@@ -14,14 +14,26 @@ public abstract class CardBehaviourBase : MonoBehaviour {
 	private bool isDrageing = false;
 	private Vector3 touchPosWorld;
 	private RaycastHit[] hits;
+	//ref of board
+	private BoardBehavior board;
 
+
+	public void Start () {
+		// // find the board		
+		board = (BoardBehavior)FindObjectOfType(typeof(BoardBehavior));			
+		if(board == null){
+			Debug.Log("Board ref == null");
+			print("NO BOARD FOUND");
+		}
+		//  Debug.Log("Start called.");
+	}
 	void Update () {
-		UpdateUI();
+		UpdateUI();	
 		// also using mouse down for testing
 
 		// use for phone
 		if (Input.touchCount > 0 ) {			
-			print("Tougcht");
+			
 			//just to be sure
 			costMonney = 0;
 
@@ -32,43 +44,47 @@ public abstract class CardBehaviourBase : MonoBehaviour {
 		if(Input.GetMouseButtonDown(0)){
 			
 			touchPosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			print(touchPosWorld);
+			
 			hits= Physics.RaycastAll(touchPosWorld, Camera.main.transform.forward);
 			for(int i = 0; i < hits.Length; i++){
 
-				if(hits[i].transform == transform) {
-					print("Hello");
-					isDrageing = true;				
+				if(hits[i].transform == transform) {					
+					isDrageing = true;	
+					board.startHolding(this);			
 				}
 			}
 			
 		}
 		if(Input.GetMouseButtonUp(0)) {
+			if(isDrageing){
+				board.stopHolding(this);
+			}
+			
 			isDrageing = false;
-			print("I stopped");
+			
 		}
 		if(isDrageing){
 			touchPosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			Vector3 newPos = new Vector3(touchPosWorld.x, touchPosWorld.y, 0.0f);
 			transform.position = newPos;
-			print("I am dragging");
+			
 			}
 
 	}
 	
-	public void OnEaten(){
+	public virtual void OnEaten(){
 
 	}
-	public void OnPlayed(){
+	public virtual void OnPlayed(){
+		
+	}
+	public virtual void OnRemoved(){
 
 	}
-	public void OnRemoved(){
+	public virtual void OnEnhanced(){
 
 	}
-	public void OnEnhanced(){
-
-	}
-	public void OnDrawn(){
+	public virtual void OnDrawn(){
 
 	}
 	private void UpdateUI(){
@@ -77,5 +93,7 @@ public abstract class CardBehaviourBase : MonoBehaviour {
 		}
 
 	}
+	
+	
 
 }
