@@ -8,10 +8,14 @@ public class UIBehavior : MonoBehaviour {
 	public Slider calorieSlider;
 	public Slider thirstSlider;
 	public Slider appetiteSlider;
+	public Text cooksText;
 	private CustomerBehavior customer;
+
+	private BoardBehavior board;
 	// Use this for initialization
 	void Start () {
 		customer = (GameObject.FindGameObjectsWithTag ("Customer") [0]).GetComponent(typeof(CustomerBehavior)) as CustomerBehavior;
+		board = (GameObject.FindGameObjectsWithTag ("Board") [0]).GetComponent(typeof(BoardBehavior)) as BoardBehavior;
 	}
 
 	// Update is called once per frame
@@ -27,5 +31,9 @@ public class UIBehavior : MonoBehaviour {
 				appetiteSlider.value = customer.appetite/ customer.appetiteMax;
 			}
 		}
+		if(board != null){
+			cooksText.text = board.getCooks().ToString();
+
+		}else { Debug.LogError("Could not find Board check tags");}
 	}
 }
