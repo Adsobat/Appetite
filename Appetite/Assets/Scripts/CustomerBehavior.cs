@@ -8,11 +8,15 @@ public class CustomerBehavior : MonoBehaviour {
 	public float thirstMax = 100;
 	public float appetite = 20;
 	public float appetiteMax = 100;
-	public float eatenCalories = 25;
+	public float eatenCalories = 0;
 	public float caloriesMax = 100;
 	
-	void Eat(CardBehaviourBase food){
-
+	public void Eat(CardBehaviourBase food){
+		thirst += food.thirst;
+		thirst = Mathf.Clamp(thirst,0,thirstMax);
+		eatenCalories += food.calories;
+		eatenCalories = Mathf.Clamp(eatenCalories,0,caloriesMax);
+		print("EAT");
 	}
 	
 	// Use this for initialization

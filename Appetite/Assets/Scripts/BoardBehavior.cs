@@ -17,7 +17,7 @@ public class BoardBehavior : MonoBehaviour {
 	private int cooks = 0;
 	private int cooksMax = 3;
 	private float timeSinceCookRep = 0;
-	private float cookRespawnTime = 10; // in seconds
+	private float cookRespawnTime = 3; // in seconds
 	// Use this for initialization
 	void Start () {
 		handCards = new List<CardBehaviourBase> ();
@@ -35,14 +35,14 @@ public class BoardBehavior : MonoBehaviour {
 		if (Input.GetKeyDown ("space")) {
 			drawCard ();
 		}
-		if(cooks < cooksMax){
-			timeSinceCookRep +=Time.deltaTime; 
-			if(timeSinceCookRep >= cookRespawnTime){
+		if (cooks < cooksMax) {
+			timeSinceCookRep += Time.deltaTime;
+			if (timeSinceCookRep >= cookRespawnTime) {
 				cooks += 1;
-				timeSinceCookRep -=cookRespawnTime;
-				if(cooks >= cooksMax){
+				timeSinceCookRep -= cookRespawnTime;
+				if (cooks >= cooksMax) {
 					cooks = cooksMax;
-					timeSinceCookRep= 0;
+					timeSinceCookRep = 0;
 				}
 			}
 		}
@@ -55,18 +55,30 @@ public class BoardBehavior : MonoBehaviour {
 		//check if card was played or moved back to hand
 		Vector3 cardCenter = card.gameObject.transform.position;
 
-		// Card is played:
+		// Card is placed on field:
 		if (fieldCollider.bounds.Contains (cardCenter)) {
-			card.OnPlayed ();
-			addToField (card);
-
+			if (card.cookCost <= cooks){
+				playCard (card);
+				cooks -= card.cookCost;
+				Mathf.Clamp (cooks, 0, cooksMax);
+			}
+			else{
+				putCardBackToHand(card);
+			}
 		}
 		// Card is put back to hand
 		if (handCollider.bounds.Contains (cardCenter)) {
-			addToHand (card);
+			putCardBackToHand (card);
 		}
 		//if(topHeaderBoxCollider.bounds.Intersects(currentHeader.boxCollider.bounds))
 
+	}
+	private void playCard (CardBehaviourBase card) {
+		card.OnPlayed ();
+		addToField (card);
+	}
+	private void putCardBackToHand (CardBehaviourBase card) {
+		addToHand (card);
 	}
 	public void drawCard () {
 
@@ -92,9 +104,9 @@ public class BoardBehavior : MonoBehaviour {
 	private void removeCard (CardBehaviourBase card) {
 		handCards.Remove (card);
 		onBoardCars.Remove (card);
-		Destroy (card.gameObject); // DIRTY TODO
+
 	}
-	public int getCooks(){
+	public int getCooks () {
 		return cooks;
 	}
 }

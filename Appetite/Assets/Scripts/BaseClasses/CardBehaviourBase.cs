@@ -4,11 +4,12 @@ using UnityEngine;
 
 public abstract class CardBehaviourBase : MonoBehaviour {
 	// costs for gameplay
-	public int cookCost;
-	public float calories;
-	public float thirst;
+	public int cookCost = 1;
+	public float calories = 10;
+	public float thirst = 0;
 	public float costMonney = 13;
 	public TextMesh costText;
+	public TextMesh cookCostText;
 
 
 	private bool isDrageing = false;
@@ -16,14 +17,24 @@ public abstract class CardBehaviourBase : MonoBehaviour {
 	private RaycastHit[] hits;
 	//ref of board
 	private BoardBehavior board;
-
-
+	private GamemanagerBehavior gameManager;
+	private CustomerBehavior customer;
 	public void Start () {
 		// // find the board		
 		board = (BoardBehavior)FindObjectOfType(typeof(BoardBehavior));			
 		if(board == null){
 			Debug.Log("Board ref == null");
 			print("NO BOARD FOUND");
+		}
+		gameManager = (GamemanagerBehavior)FindObjectOfType(typeof(GamemanagerBehavior));			
+		if(gameManager == null){
+			Debug.Log("gameManager ref == null");
+			print("NO gameManager FOUND");
+		}
+		customer = (CustomerBehavior)FindObjectOfType(typeof(CustomerBehavior));
+		if(customer == null){
+			Debug.Log("customer ref == null");
+			print("NO customer FOUND");
 		}
 		//  Debug.Log("Start called.");
 	}
@@ -73,10 +84,13 @@ public abstract class CardBehaviourBase : MonoBehaviour {
 	}
 	
 	public virtual void OnEaten(){
+		gameManager.addMonney(costMonney);
+		customer.Eat(this);
 
+		Destroy (gameObject); // DIRTY TODO
 	}
-	public virtual void OnPlayed(){
-		
+	public virtual void OnPlayed(){		
+		OnEaten();
 	}
 	public virtual void OnRemoved(){
 
@@ -91,9 +105,14 @@ public abstract class CardBehaviourBase : MonoBehaviour {
 		if(costText !=null){
 			costText.text = costMonney + " €";
 		}
+		if(cookCostText != null){
+			cookCostText.text = cookCost.ToString();
+		}
 
 	}
-	
+	public bool isPlayable(){
+		return board.getCooks() >= cookCost;
+	}
 	
 
 }
