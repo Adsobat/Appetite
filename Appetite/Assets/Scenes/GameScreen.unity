@@ -255,7 +255,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.05, y: 1.76}
+  m_Size: {x: 12, y: 2.2350116}
   m_EdgeRadius: 0
 --- !u!4 &201618689
 Transform:
@@ -264,8 +264,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 201618687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4, y: -3.52, z: 0}
-  m_LocalScale: {x: 1, y: 1.4645313, z: 1}
+  m_LocalPosition: {x: -1.42, y: -3.69, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 358174046}
   m_RootOrder: 1
@@ -279,11 +279,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.13
+      value: 1.87
       objectReference: {fileID: 0}
     - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.56
+      value: 3.79
       objectReference: {fileID: 0}
     - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
       propertyPath: m_LocalPosition.z
@@ -624,7 +624,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand2DCollider: {fileID: 201618688}
-  fieldCollider: {fileID: 0}
   field2DCollider: {fileID: 1496496744}
   DummyCard: {fileID: 1131988416903496, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
 --- !u!4 &358174046

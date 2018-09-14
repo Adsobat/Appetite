@@ -111,18 +111,28 @@ public class BoardBehavior : MonoBehaviour {
     }
     private void rearangeHandCards(){
        float length = hand2DCollider.size.x;
+       print("SIZE!!!: " + hand2DCollider.size);
        int n = 0;
+       float handCenterX = hand2DCollider.gameObject.transform.position.x + hand2DCollider.offset.x;
+       float handCenterY = hand2DCollider.gameObject.transform.position.y + hand2DCollider.offset.y;
+       float offset = length / (2+ handCards.Count );
+       float offsetCenter = offset * handCards.Count / 2;
+       Vector3 newPosition;
        foreach (CardBehaviourBase card in handCards)
        {
           // float newXPos = (handCollider.center.x - length/2) + length/(n+1);
             //float newXPos = (hand2DCollider.center.x - length/2) ;
-            float handCenterX = hand2DCollider.gameObject.transform.position.x + hand2DCollider.offset.x;
-            float handCenterY = hand2DCollider.gameObject.transform.position.y + hand2DCollider.offset.y;
+            // distribute cards evenly
+            
+            float newXPos = (handCenterX ) + (n*offset) ;
+            newPosition = new Vector3(newXPos,handCenterY, 0 );
+            //Move to center
+            newPosition.x -=offsetCenter;
 
-            float newXPos = (handCenterX - length/2) ;
-
-           card.gameObject.transform.position = new Vector3(newXPos,handCenterY, 0 );
+            //Apply new Position
+            card.gameObject.transform.position = new Vector3 (newPosition.x,newPosition.y,newPosition.z); //I could not find the copy constructor
            n++;
+          
        }
     }
 
