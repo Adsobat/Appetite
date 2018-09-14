@@ -257,6 +257,52 @@ Transform:
   m_Father: {fileID: 358174046}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &210656717
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1131988416903496, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
+      propertyPath: m_Name
+      value: DummyCard
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &250400097
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,57 +942,6 @@ MonoBehaviour:
   appetiteSlider: {fileID: 1112813197}
   cooksText: {fileID: 1453513345}
   MonneyText: {fileID: 338372801}
---- !u!1001 &685554880
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 1.63
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1131988416903496, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
-      propertyPath: m_Name
-      value: DummyCard
-      objectReference: {fileID: 0}
-    - target: {fileID: 114047997843384820, guid: 93bedf1e2d607e948b86eb794b04b36d,
-        type: 2}
-      propertyPath: cookCost
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &809537498
 GameObject:
   m_ObjectHideFlags: 0
