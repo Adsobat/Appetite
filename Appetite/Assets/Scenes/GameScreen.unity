@@ -232,18 +232,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &201618688
-BoxCollider:
+--- !u!61 &201618688
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 201618687}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.73, y: 2.36, z: 1}
-  m_Center: {x: -0.83, y: -3.2, z: 0}
+  m_Size: {x: 10.05, y: 1.76}
+  m_EdgeRadius: 0
 --- !u!4 &201618689
 Transform:
   m_ObjectHideFlags: 0
@@ -251,8 +264,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 201618687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.1375, z: 1}
+  m_LocalPosition: {x: -1.4, y: -3.52, z: 0}
+  m_LocalScale: {x: 1, y: 1.4645313, z: 1}
   m_Children: []
   m_Father: {fileID: 358174046}
   m_RootOrder: 1
@@ -266,11 +279,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.57
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -3.56
       objectReference: {fileID: 0}
     - target: {fileID: 4149977538955466, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
       propertyPath: m_LocalPosition.z
@@ -299,6 +312,31 @@ Prefab:
     - target: {fileID: 1131988416903496, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
       propertyPath: m_Name
       value: DummyCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 65053434197743542, guid: 93bedf1e2d607e948b86eb794b04b36d,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 2.7313976
+      objectReference: {fileID: 0}
+    - target: {fileID: 65053434197743542, guid: 93bedf1e2d607e948b86eb794b04b36d,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 0.9999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 65053434197743542, guid: 93bedf1e2d607e948b86eb794b04b36d,
+        type: 2}
+      propertyPath: m_Center.x
+      value: -0.09930101
+      objectReference: {fileID: 0}
+    - target: {fileID: 65053434197743542, guid: 93bedf1e2d607e948b86eb794b04b36d,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 1.8862013
+      objectReference: {fileID: 0}
+    - target: {fileID: 65053434197743542, guid: 93bedf1e2d607e948b86eb794b04b36d,
+        type: 2}
+      propertyPath: m_Center.y
+      value: -0.013100675
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
@@ -585,8 +623,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a7e0c5b5853e94c8adfc6d49c5f6f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handCollider: {fileID: 201618688}
+  hand2DCollider: {fileID: 201618688}
   fieldCollider: {fileID: 1496496744}
+  field2DCollider: {fileID: 0}
   DummyCard: {fileID: 1131988416903496, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
 --- !u!4 &358174046
 Transform:

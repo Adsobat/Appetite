@@ -1,10 +1,9 @@
-﻿using System.Collections;
-
+using System.Collections;
 using UnityEngine;
 
 public class DebuggEffect : MonoBehaviour, IEffect {
 
-	void IEffect.DoEffect(){
-		// Print("adfasf");
-	}
+    void IEffect.DoEffect () {
+        // Print("adfasf");
+    }
 }
