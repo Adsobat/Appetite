@@ -6,9 +6,7 @@ using UnityEngine;
 //TODO make board a singleton
 public class BoardBehavior : MonoBehaviour {
 
-    //public BoxCollider handCollider;
     public BoxCollider2D hand2DCollider;
-    public BoxCollider fieldCollider;
     public BoxCollider2D field2DCollider;
     //TODO Remove just for Debugg
     public GameObject DummyCard;
@@ -58,7 +56,7 @@ public class BoardBehavior : MonoBehaviour {
         Vector3 cardCenter = card.gameObject.transform.position;
 
         // Card is placed on field:
-        if (fieldCollider.bounds.Contains (cardCenter)) {
+        if (field2DCollider.bounds.Contains (cardCenter)) {
             if (card.cookCost <= cooks) {
                 playCard (card);
                 cooks -= card.cookCost;
@@ -98,7 +96,9 @@ public class BoardBehavior : MonoBehaviour {
     }
     public void addToField (CardBehaviourBase card) {
         onBoardCars.Add (card);
-        card.gameObject.transform.position = fieldCollider.center;
+        Vector2 fieldPosition = new Vector2 (field2DCollider.gameObject.transform.position.x, 
+                                 field2DCollider.gameObject.transform.position.y) + field2DCollider.offset;
+        card.gameObject.transform.position = new Vector3 (fieldPosition.x, fieldPosition.y, 0 );
         //TODO JUST FOR DEBUGG!!
         removeCard (card);
         rearangeHandCards();

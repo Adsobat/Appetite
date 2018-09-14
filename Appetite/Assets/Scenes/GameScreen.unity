@@ -624,8 +624,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand2DCollider: {fileID: 201618688}
-  fieldCollider: {fileID: 1496496744}
-  field2DCollider: {fileID: 0}
+  fieldCollider: {fileID: 0}
+  field2DCollider: {fileID: 1496496744}
   DummyCard: {fileID: 1131988416903496, guid: 93bedf1e2d607e948b86eb794b04b36d, type: 2}
 --- !u!4 &358174046
 Transform:
@@ -1636,18 +1636,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1496496744
-BoxCollider:
+--- !u!61 &1496496744
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1496496743}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.6055145, y: 0.022849083}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.01, y: 3.58, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 11.35088, y: 3.2392616}
+  m_EdgeRadius: 0
 --- !u!4 &1496496745
 Transform:
   m_ObjectHideFlags: 0
