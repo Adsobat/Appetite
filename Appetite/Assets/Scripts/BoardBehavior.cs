@@ -13,11 +13,12 @@ public class BoardBehavior : MonoBehaviour {
 
     private List<CardBehaviourBase> handCards;
     private List<CardBehaviourBase> onBoardCars;
-    private CardBehaviourBase       holdingCard;
+    private CardBehaviourBase holdingCard;
     private int cooks = 0;
     private int cooksMax = 3;
     private float timeSinceCookRep = 0;
     private float cookRespawnTime = 3; // in seconds
+    private int MaxCardPerRow = 4;
     // Use this for initialization
     void Start () {
         handCards = new List<CardBehaviourBase> ();
@@ -75,7 +76,7 @@ public class BoardBehavior : MonoBehaviour {
     private void playCard (CardBehaviourBase card) {
         card.OnPlayed ();
         addToField (card);
-    } 
+    }
     public void drawCard () {
 
         addToHand (((GameObject) Instantiate (DummyCard, transform.position, transform.rotation)).GetComponent (typeof (CardBehaviourBase)) as CardBehaviourBase);
@@ -91,49 +92,74 @@ public class BoardBehavior : MonoBehaviour {
         // card.gameObject.transform.position = hand2DCollider.center;
         card.gameObject.transform.position = hand2DCollider.offset;
 
-        rearangeHandCards();
-        print ("Amounts of cards hodlung: " + handCards.Count);
+        rearangeHandCards ();
+        //print ("Amounts of cards hodlung: " + handCards.Count);
     }
     public void addToField (CardBehaviourBase card) {
         onBoardCars.Add (card);
-        Vector2 fieldPosition = new Vector2 (field2DCollider.gameObject.transform.position.x, 
-                                 field2DCollider.gameObject.transform.position.y) + field2DCollider.offset;
-        card.gameObject.transform.position = new Vector3 (fieldPosition.x, fieldPosition.y, 0 );
+        Vector2 fieldPosition = new Vector2 (field2DCollider.gameObject.transform.position.x,
+            field2DCollider.gameObject.transform.position.y) + field2DCollider.offset;
+        card.gameObject.transform.position = new Vector3 (fieldPosition.x, fieldPosition.y, 0);
         //TODO JUST FOR DEBUGG!!
         removeCard (card);
-        rearangeHandCards();
+        rearangeHandCards ();
     }
     private void removeCard (CardBehaviourBase card) {
         handCards.Remove (card);
         onBoardCars.Remove (card);
-        
 
     }
-    private void rearangeHandCards(){
-       float length = hand2DCollider.size.x;
-       print("SIZE!!!: " + hand2DCollider.size);
-       int n = 0;
-       float handCenterX = hand2DCollider.gameObject.transform.position.x + hand2DCollider.offset.x;
-       float handCenterY = hand2DCollider.gameObject.transform.position.y + hand2DCollider.offset.y;
-       float offset = length / (2+ handCards.Count );
-       float offsetCenter = offset * handCards.Count / 2;
-       Vector3 newPosition;
-       foreach (CardBehaviourBase card in handCards)
-       {
-          // float newXPos = (handCollider.center.x - length/2) + length/(n+1);
-            //float newXPos = (hand2DCollider.center.x - length/2) ;
-            // distribute cards evenly
-            
-            float newXPos = (handCenterX ) + (n*offset) ;
-            newPosition = new Vector3(newXPos,handCenterY, 0 );
-            //Move to center
-            newPosition.x -=offsetCenter;
+    private void rearangeHandCards () {
+        float length = hand2DCollider.size.x;
+        float height = hand2DCollider.size.y;
+        Vector3 newPosition;
+        // do we have to much cards in one handrow
+        //if (handCards.Count > MaxCardPerRow) {
+        int rowAmount = Mathf.CeilToInt ((float)handCards.Count / MaxCardPerRow);
+        float handCenterX = hand2DCollider.gameObject.transform.position.x + hand2DCollider.offset.x;
+        float handCenterY = hand2DCollider.gameObject.transform.position.y + hand2DCollider.offset.y;
+        
 
-            //Apply new Position
-            card.gameObject.transform.position = new Vector3 (newPosition.x,newPosition.y,newPosition.z); //I could not find the copy constructor
-           n++;
-          
-       }
+        int cardPerRow = Mathf.CeilToInt ((float)handCards.Count /(float) rowAmount); //round up
+
+        //float offsetX = length / (2 + handCards.Count);
+        float offsetX = length / (1 + cardPerRow);
+        float offsetY = height / (1 + rowAmount);
+        print( handCards.Count +" / " + rowAmount + " = Cards Per row: " + cardPerRow);
+        
+        float offsetCenter = offsetX * handCards.Count / 2;
+        offsetCenter = offsetX * cardPerRow / 2;
+        CardBehaviourBase card;
+        for (int i = 0; i < rowAmount; i++) {
+            
+
+            for (int j = cardPerRow * i; j < cardPerRow * i + cardPerRow; j++) {
+               
+                if (j < handCards.Count) {// check if elements exist. Important because we have to round up cardPerRow
+                    card = handCards[j];
+                    int numInHand = j - i * cardPerRow;
+                    float newXPos = (handCenterX) + ( (numInHand+1) * offsetX);
+                    float newYPos = handCenterY + (i * offsetY);
+                    //newYPos = handCenterY ;//debugg
+
+                    newPosition = new Vector3 (newXPos, newYPos, 0);
+                    //Move to center
+                    newPosition.x -= offsetCenter;
+
+                    //Apply new Position
+                    card.gameObject.transform.position = new Vector3 (newPosition.x, newPosition.y, newPosition.z); //I could not find the copy constructor
+                    // card.gameObject.transform.position = hand2DCollider.gameObject.transform.position;
+
+                    print("Move Card with index:  " + j + "to position " + card.gameObject.transform.position);
+                }
+                else{
+                    print("Did overflow at: " + j);
+                }
+
+            }
+
+        }
+
     }
 
     public int getCooks () {
