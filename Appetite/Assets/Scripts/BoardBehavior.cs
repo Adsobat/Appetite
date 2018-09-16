@@ -18,7 +18,7 @@ public class BoardBehavior : MonoBehaviour {
     private int cooksMax = 3;
     private float timeSinceCookRep = 0;
     private float cookRespawnTime = 3; // in seconds
-    private int MaxCardPerRow = 4;
+    public int MaxCardPerRow = 4;
     // Use this for initialization
     void Start () {
         handCards = new List<CardBehaviourBase> ();
@@ -125,9 +125,10 @@ public class BoardBehavior : MonoBehaviour {
         //float offsetX = length / (2 + handCards.Count);
         float offsetX = length / (1 + cardPerRow);
         float offsetY = height / (1 + rowAmount);
-        print( handCards.Count +" / " + rowAmount + " = Cards Per row: " + cardPerRow);
+       // print( handCards.Count +" / " + rowAmount + " = Cards Per row: " + cardPerRow);
         
         float offsetCenter = offsetX * handCards.Count / 2;
+        offsetCenter = length / 2;
         offsetCenter = offsetX * cardPerRow / 2;
         CardBehaviourBase card;
         for (int i = 0; i < rowAmount; i++) {
@@ -143,18 +144,17 @@ public class BoardBehavior : MonoBehaviour {
                     //newYPos = handCenterY ;//debugg
 
                     newPosition = new Vector3 (newXPos, newYPos, 0);
-                    //Move to center
-                    newPosition.x -= offsetCenter;
-
+                    //Move to center                    
+                    newPosition.x -= length/2;
                     //Apply new Position
                     card.gameObject.transform.position = new Vector3 (newPosition.x, newPosition.y, newPosition.z); //I could not find the copy constructor
                     // card.gameObject.transform.position = hand2DCollider.gameObject.transform.position;
 
-                    print("Move Card with index:  " + j + "to position " + card.gameObject.transform.position);
+                    //print("Move Card with index:  " + j + "to position " + card.gameObject.transform.position);
                 }
-                else{
-                    print("Did overflow at: " + j);
-                }
+                // else{
+                //    // print("Did overflow at: " + j);
+                // }
 
             }
 
