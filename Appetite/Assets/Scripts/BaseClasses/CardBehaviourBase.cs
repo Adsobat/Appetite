@@ -8,6 +8,9 @@ public abstract class CardBehaviourBase : MonoBehaviour {
     public float calories = 10;
     public float thirst = 0;
     public float costMonney = 13;
+    public cardTypes CardType;
+    private int cardID; // this is a unique id to identify the cardprefab. ID is set from database.
+   
     public TextMesh costText;
     public TextMesh cookCostText;
 
@@ -18,6 +21,8 @@ public abstract class CardBehaviourBase : MonoBehaviour {
     private BoardBehavior board;
     private GamemanagerBehavior gameManager;
     private CustomerBehavior customer;
+    
+    
 
     public void Start () {
         // // find the board		

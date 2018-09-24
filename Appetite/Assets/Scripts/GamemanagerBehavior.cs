@@ -6,6 +6,8 @@ public class GamemanagerBehavior : MonoBehaviour {
     public float levelDuration = 0.5f; // in Minutes
     private float timeElapsed = .0f;
     private float monney = 0;
+
+    private bool isLevelRunning = true;
     // Use this for initialization
     void Start () {
 
@@ -15,7 +17,9 @@ public class GamemanagerBehavior : MonoBehaviour {
     void Update () {
         timeElapsed += Time.deltaTime;
         if (MinutedToSeconds (levelDuration) <= timeElapsed) {
-            finsihLeve ();
+            if(isLevelRunning){
+                finsihLeve ();
+            }
         }
     }
 
@@ -24,6 +28,7 @@ public class GamemanagerBehavior : MonoBehaviour {
     }
     public void finsihLeve () {
         print ("Game finishend");
+        isLevelRunning= false;
     }
     public void addMonney (float monneyToAdd) {
         monney += monneyToAdd;
