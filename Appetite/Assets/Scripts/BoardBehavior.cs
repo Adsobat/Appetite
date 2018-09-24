@@ -7,7 +7,7 @@ using UnityEngine;
 public class BoardBehavior : MonoBehaviour {
 
         public BoxCollider2D hand2DCollider;
-        public BoxCollider2D field2DCollider;
+        public Collider2D field2DCollider;
         //TODO Remove just for Debugg
         public GameObject DummyCard;
 
