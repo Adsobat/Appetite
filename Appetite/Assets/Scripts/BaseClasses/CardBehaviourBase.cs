@@ -95,7 +95,7 @@ public abstract class CardBehaviourBase : MonoBehaviour {
         Destroy (gameObject); // DIRTY TODO
     }
     public virtual void OnPlayed () {
-        OnEaten ();
+        //OnEaten ();
     }
     public virtual void OnRemoved () {
 
