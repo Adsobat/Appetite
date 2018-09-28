@@ -11,7 +11,7 @@ public class DummyCard : CardBehaviourBase {
 
     public override void OnPlayed () {
         base.OnPlayed ();
-        print ("I am played DUMMY");
+        //print ("I am played DUMMY");
 
     }
 }

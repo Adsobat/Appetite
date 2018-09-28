@@ -11,9 +11,10 @@ public class BoardBehavior : MonoBehaviour {
     public BoxCollider2D field2DCollider;
     //TOD  O Remove just for Debugg
 
-
     private List<CardBehaviourBase> handCards;
-    private List<CardBehaviourBase> onBoardCars;
+   
+    private CardContainer onBoardCars;
+
     private CardBehaviourBase holdingCard;
     public int cooks = 3;
     public int cooksMax = 5;
@@ -22,16 +23,24 @@ public class BoardBehavior : MonoBehaviour {
     public int MaxCardPerRow = 4;
     public int MaxCardPerTable = 4;
     private PlayerBehavior player;
+
+    private float tableRoatation = 0; // rotation of the table in radiant
+    public float tableRotatespeed = 5; // in seconds
     // Use this for initialization
     void Start () {
         handCards = new List<CardBehaviourBase> ();
-        onBoardCars = new List<CardBehaviourBase> ();
+        //onBoardCars = new List<CardBehaviourBase> ();
+        onBoardCars = ScriptableObject.CreateInstance<CardContainer>();
+        onBoardCars.Init(MaxCardPerTable);
         holdingCard = null;
 
         player = ((PlayerBehavior) FindObjectOfType (typeof (PlayerBehavior)));
         //TODO
         //REMOVE JUST FOR DEBUGG
         addToHand ((CardBehaviourBase) FindObjectOfType (typeof (CardBehaviourBase)));
+
+        // Start rotating table;
+        InvokeRepeating ("rotateTable", tableRotatespeed, tableRotatespeed);
     }
 
     // Update is called once per frame
@@ -107,9 +116,9 @@ public class BoardBehavior : MonoBehaviour {
         //print ("Amounts of cards hodlung: " + handCards.Count);
     }
     public void addToField (CardBehaviourBase card) {
-        onBoardCars.Add (card);
-        Vector2 fieldPosition = new Vector2 (field2DCollider.gameObject.transform.position.x,
-            field2DCollider.gameObject.transform.position.y) + field2DCollider.offset;
+        onBoardCars.add (card);
+        // Vector2 fieldPosition = new Vector2 (field2DCollider.gameObject.transform.position.x,
+        //     field2DCollider.gameObject.transform.position.y) + field2DCollider.offset;
         //card.gameObject.transform.position = new Vector3 (fieldPosition.x, fieldPosition.y, 0);
         //TODO JUST FOR DEBUGG!!
         //removeCard (card);
@@ -118,7 +127,7 @@ public class BoardBehavior : MonoBehaviour {
     }
     private void removeCard (CardBehaviourBase card) {
         handCards.Remove (card);
-        onBoardCars.Remove (card);
+        onBoardCars.remove (card);
 
     }
     private void rearangeFielCards () {
@@ -130,11 +139,15 @@ public class BoardBehavior : MonoBehaviour {
         // radian for the ellipse table
         float rX = length / 2;
         float rY = height / 2;
-        for (int i = 0; i < onBoardCars.Count; i++) {            
-            alpha = (float ) ((float) i * (2*Mathf.PI / MaxCardPerTable));           
-            Vector2 newPosition = new Vector2(height/2, alpha).TransPolarToKar();            
+        for (int i = 0; i < onBoardCars.getCount (); i++) {
+            alpha = (float) ((float) i * (2 * Mathf.PI / MaxCardPerTable));
+            alpha += tableRoatation;
+            Vector2 newPosition = new Vector2 (height / 2, alpha).TransPolarToKar ();
             newPosition = newPosition + new Vector2 (center.x, center.y);
-            onBoardCars[i].transform.position = new Vector3 (newPosition.x, newPosition.y, 0);
+            if (onBoardCars.get (i) != null) {
+                onBoardCars.get (i).transform.position = new Vector3 (newPosition.x, newPosition.y, 0);
+                // onBoardCars[i].transform.position = new Vector3 (newPosition.x, newPosition.y, 0);
+            }
         }
     }
 
@@ -190,6 +203,22 @@ public class BoardBehavior : MonoBehaviour {
     public int getCooks () {
         return cooks;
     }
+    public void rotateTable (int rotateAmount) {
+        // Old version keep for animation
+        // tableRoatation += (float) ((float) rotateAmount * (2 * Mathf.PI / MaxCardPerTable));
+        // tableRoatation = tableRoatation % (2 * Mathf.PI);
+        for(int i = 0; i < rotateAmount; i++){
+            onBoardCars.rotateElements();
+        }
+        // Always check for null because if the table is empty get() returns null
+        if(onBoardCars.get(0) != null){
+            onBoardCars.get(0).OnEaten();
+        }
+        rearangeFielCards ();
 
+    }
+    public void rotateTable () {
+        rotateTable (1);
 
+    }
 }

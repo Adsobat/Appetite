@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +22,8 @@ public abstract class CardBehaviourBase : MonoBehaviour {
     private GamemanagerBehavior gameManager;
     private CustomerBehavior customer;
     
+    //
+
     
 
     public void Start () {
