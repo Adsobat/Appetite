@@ -92,11 +92,14 @@ public class BoardBehavior : MonoBehaviour {
     }
     public void drawCard () {
         int rand = Random.Range (0, 2);
+        int randCard= 0; 
         if (rand == 0) {
-            addToHand (((GameObject) Instantiate (player.vegetableDeck[0], transform.position, transform.rotation)).GetComponent (typeof (CardBehaviourBase)) as CardBehaviourBase);
+            randCard = Random.Range(0, player.vegetableDeck.Count);
+            addToHand (((GameObject) Instantiate (player.vegetableDeck[randCard], transform.position, transform.rotation)).GetComponent (typeof (CardBehaviourBase)) as CardBehaviourBase);
             print ("vegetable Drawn");
         } else if (rand == 1) {
-            addToHand (((GameObject) Instantiate (player.meatDeck[0], transform.position, transform.rotation)).GetComponent (typeof (CardBehaviourBase)) as CardBehaviourBase);
+            randCard = Random.Range(0, player.meatDeck.Count);
+            addToHand (((GameObject) Instantiate (player.meatDeck[randCard], transform.position, transform.rotation)).GetComponent (typeof (CardBehaviourBase)) as CardBehaviourBase);
             print ("meat drawn");
         }
 
