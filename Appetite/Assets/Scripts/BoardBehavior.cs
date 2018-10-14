@@ -108,6 +108,7 @@ public class BoardBehavior : MonoBehaviour {
 
         holdingCard = card;
         handCards.Remove (card);
+        onBoardCars.remove(card);
 
     }
     public void addToHand (CardBehaviourBase card) {
